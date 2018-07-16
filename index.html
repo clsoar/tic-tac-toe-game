@@ -33,9 +33,9 @@
         </div>
       </form>
     </div>
-    <main class="main-container" role="main">
 
-      <section id="gameboard" role="application"></section>
+    <main class="main-container" role="main">
+      <section id="gameboard" class="gameboard" role="application"></section>
         <h2 id="players-turn">Player 1's Turn</h2>
         <div id="board-container">
           <table id="board" class="board">
@@ -56,14 +56,14 @@
             </tr>
           </table>
         </div>
-      <section id="player-info" aria-label="Player Information">
-        <h2 id="first-player">Player 1</h2>
-        <div id="player1-piece">X</div>
-        <h2 id="second-player">Player 2</h2>
-        <div id="player2-piece">O</div>
-        <button id="change-payer-info">Change Player Info</button>
+      <section id="player-info" class="player-info" aria-label="Player Information">
+        <h2 id="first-player" class="player-one">Player 1</h2>
+        <div id="player1-piece" class="player-one">X</div>
+        <h2 id="second-player" class="player-two">Player 2</h2>
+        <div id="player2-piece" class="player-two">O</div>
+        <button id="change-player-info">Change Player Info</button>
       </section>
-      <section id="scoreboard" role="region">
+      <section id="scoreboard" role="region" aria-label="Scoreboard">
         <table>
           <tr></tr>
             <th></th>
