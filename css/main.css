@@ -20,3 +20,28 @@ table {
 #td2, #td3, #td5, #td6, #td8, #td9 {
     border-left: 1px solid black;
 }
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  background-color: rgb(0,0,0);
+  background-color: rgb(1,1,1,0.8)
+}
+.modal-container {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.form-modal {
+  color: white;
+  padding: 20px;
+  border: 1px solid black;
+  width: 90%;
+}
+.submit {
+  display: inline;
+  padding: 50px;
+}

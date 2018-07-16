@@ -10,29 +10,31 @@
     <header class="heading">
       <h1>Tic Tac Toe Game</h1>
     </header>
-    <main class="container" role="main">
-      <section id="player-modal" role="dialog"></section>
-        <form>
-          <div class="form-modal">
-            <label for="player1-name">Player 1 Name: </label>
-            <input type="text" name="player1-name" id="player1-name" value="Player 1" maxlength="11">
-          </div>
-          <div class="form-modal">
-            Select X or O for Player 1:
-            <input type="radio" name="game-piece" id="select-x" value="X" checked> X
-            <input type="radio" name="game-piece" id="select-o" value="O"> O
-          </div>
-          <div class="form-modal">
-            <label for="player2-name">Player 2 Name: </label>
-            <input type="text" name="player2-name" id="player2-name" value="Player 2" maxlength="11">
-          </div>
-          <div class="form-modal">
-            <input type="submit" value="Cancel">
-          </div>
-          <div class="form-modal submit">
-            <input type="submit" value="Submit">
-          </div>
-        </form>
+    <div id="player-modal" class="modal modal-container" role="dialog">
+      <form>
+        <div class="form-modal">
+          <label for="player1-name">Player 1 Name: </label>
+          <input type="text" name="player1-name" id="player1-name" value="Player 1" maxlength="11">
+        </div>
+        <div class="form-modal">
+          Select X or O for Player 1:
+          <input type="radio" name="game-piece" id="select-x" value="X" checked> X
+          <input type="radio" name="game-piece" id="select-o" value="O"> O
+        </div>
+        <div class="form-modal">
+          <label for="player2-name">Player 2 Name: </label>
+          <input type="text" name="player2-name" id="player2-name" value="Player 2" maxlength="11">
+        </div>
+        <div class="submit">
+          <input type="submit" value="Cancel">
+        </div>
+        <div class="submit">
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+    <main class="main-container" role="main">
+
       <section id="gameboard" role="application"></section>
         <h2 id="players-turn">Player 1's Turn</h2>
         <div id="board-container">
