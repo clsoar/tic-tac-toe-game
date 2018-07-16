@@ -1,0 +1,22 @@
+table {
+  border-collapse: collapse;
+}
+#scoreboard table,
+#scoreboard th,
+#scoreboard td {
+    border: 1px solid black;
+}
+#board table,
+#board td {
+    min-width: 70px;
+    height: 70px;
+}
+.top-line td {
+  border-bottom: 1px solid black;
+}
+.middle-line td {
+  border-bottom: 1px solid black;
+}
+#td2, #td3, #td5, #td6, #td8, #td9 {
+    border-left: 1px solid black;
+}
