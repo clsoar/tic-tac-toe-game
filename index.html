@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tic Tac Toe Game</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <header class="heading">
+      <h1>Tic Tac Toe Game</h1>
+    </header>
+    <main class="container" role="main">
+      <section id="player-modal" role="dialog"></section>
+        <form>
+          <div class="form-modal">
+            <label for="player1-name">Player 1 Name: </label>
+            <input type="text" name="player1-name" id="player1-name" value="Player 1" maxlength="11">
+          </div>
+          <div class="form-modal">
+            Select X or O:
+            <input type="radio" name="game-piece" id="select-x" value="X" checked> X
+            <input type="radio" name="game-piece" id="select-o" value="O"> O
+          </div>
+          <div class="form-modal">
+            <label for="player2-name">Player 2 Name: </label>
+            <input type="text" name="player2-name" id="player2-name" value="Player 2" maxlength="11">
+          </div>
+          <div class="form-modal">
+            <input type="submit" value="Cancel">
+          </div>
+          <div class="form-modal submit">
+            <input type="submit" value="Submit">
+          </div>
+        </form>
+      <section id="gameboard" role="application"></section>
+        <h2 id="players-turn">Player 1's Turn</h2>
+        <div id="board"></div>
+      <section id="player-info" aria-label="Player Information">
+        <h2 id="first-player">Player 1</h2>
+        <div id="player1-piece">X</div>
+        <h2 id="second-player">Player 2</h2>
+        <div id="player2-piece">O</div>
+        <button id="change-payer-info">Change Player Info</button>
+      </section>
+      <section id="scoreboard" role="region">
+        <table>
+          <tr></tr>
+            <td></td>
+            <td>Wins</td>
+            <td>Draws</td>
+          <tr id="player1-row">
+            <td>Player 1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr id="player2-row">
+            <td>Player 2</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        </table>
+        <button id="reset-game">Reset Game</button>
+        <button id="reset-scores">Reset Scores Only</button>
+      </section>
+    </main>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
