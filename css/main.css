@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: monospace;
+}
 h1 {
   text-align: center;
 }
@@ -15,6 +21,7 @@ h1 {
 #board {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 15px;
 }
 table {
   border-collapse: collapse;
@@ -37,22 +44,26 @@ table {
  * Player info
  */
 .player-info {
-   border: 3px solid navy;
-   padding: 5px;
-   display: block;
+  border: 3px solid navy;
+  display: flex;
+  flex-wrap: wrap;
  }
  .player-one, .player-two {
-   display: inline;
-   padding: 5px;
-   margin-left: auto;
-   margin-right: auto;
+  padding: 5px;
+  margin: auto;
+  font-size: 20px;
+  font-weight: 550;
  }
  #change-player-info {
    background-color: navy;
    color: white;
    height: 100%;
-   padding: 15px 4px;
+   padding: 5px 4px;
    min-width: 48px;
+   margin: auto;
+ }
+ .piece-example {
+   width: 30px;
  }
 /*
  * Scoreboard
