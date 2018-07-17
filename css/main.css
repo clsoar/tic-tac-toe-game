@@ -7,6 +7,14 @@ body {
 h1 {
   text-align: center;
 }
+button {
+  background-color: navy;
+  color: white;
+  height: 100%;
+  padding: 5px 4px;
+  min-width: 48px;
+  margin: auto;
+}
 /*
  * Main Container
  */
@@ -54,15 +62,7 @@ table {
   font-size: 20px;
   font-weight: 550;
  }
- #change-player-info {
-   background-color: navy;
-   color: white;
-   height: 100%;
-   padding: 5px 4px;
-   min-width: 48px;
-   margin: auto;
- }
- .piece-example {
+.piece-example {
    width: 30px;
  }
 /*
@@ -71,7 +71,20 @@ table {
 #scoreboard table,
 #scoreboard th,
 #scoreboard td {
-    border: 1px solid black;
+  border: 3px solid navy;
+}
+#scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+}
+#scoreboard table {
+  margin: 10px auto;
+}
+#scoreboard td {
+  min-width: 80px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
 }
 /*
  * Popup Modal
