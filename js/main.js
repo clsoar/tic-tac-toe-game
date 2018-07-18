@@ -1,38 +1,68 @@
 "use strict";
 //view
 const modal = document.querySelector("#player-modal");
-console.log(modal);
 const cancelButton = document.querySelector("input[value='Cancel']");
-console.log(cancelButton);
 const submitButton = document. querySelector("input[value='Submit']");
-console.log(submitButton);
 const newGameButton = document.querySelector(".start-game");
-console.log(newGameButton);
+const player1Score = document.querySelector("#player1-row td:nth-of-type(2)");
+const player2Score = document.querySelector("#player2-row td:nth-of-type(2)");
+const player1Draw = document.querySelector("#player1-row td:nth-of-type(3)");
+const player2Draw = document.querySelector("#player2-row td:nth-of-type(3)");
+
+//hide button functions
 const hideStartButton = () => {
   newGameButton.classList.add("start-game", "hidden");
 };
 const hideModal = () => {modal.classList.add("hidden");};
 const showModal = () => {modal.classList.remove("hidden");};
 
+//render functions
 const renderX = (cell) => {
   const pieceX = document.createElement("img");
   pieceX.setAttribute("src", "img/x-mark-128.png");
   pieceX.setAttribute("alt", "X Mark");
   pieceX.classList.add("board-piece");
   cell.appendChild(pieceX);
-}
+};
 const renderO = (cell) => {
   const pieceO = document.createElement("img");
   pieceX.setAttribute("src", "circle-outline-128.png");
   pieceX.setAttribute("alt", "O Mark");
   pieceX.classList.add("board-piece");
   cell.appendChild(pieceO);
+};
+const renderScores = (player1Wins, player2Wins, draws) => {
+  player1Draw.innerText = draws;
+  player2Draw.innerText = draws;
+  player1Score.innerText = player1Wins;
+  player2Score.innerText = player2Wins;
+
 }
+
 //model
-
-
-
+let player1Wins = 3,
+    player2Wins = 5,
+    draws = 4;
 //octopus
+renderScores(player1Wins, player2Wins, draws);
+//reset scores
+const resetScore = () => {
+  //set Wins to 0
+  player1Wins = 0;
+  player2Wins = 0;
+  //set draws to 0
+  draws = 0;
+  renderScores(player1Wins, player2Wins, draws);
+  console.log("scores are now reset");
+};
+//reset game
+const resetGame = () => {
+  //resetScore();
+  //clear board
+  console.log("game reset now");
+};
+
+
 //listen for Player Form Cancel and then hide modal
 cancelButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -71,7 +101,7 @@ document.querySelector("#reset-game").addEventListener("click", (event) => {
 
 //listen for reset scores button
 document.querySelector("#reset-scores").addEventListener("click", (event) => {
-  // TODO: add reset scores function
+  resetScore();
   console.log("reset scores");
 });
 
