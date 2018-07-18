@@ -36,8 +36,15 @@ const renderScores = (player1Wins, player2Wins, draws) => {
   player2Draw.innerText = draws;
   player1Score.innerText = player1Wins;
   player2Score.innerText = player2Wins;
-
-}
+};
+const clearBoard = () => {
+  boardCells.forEach((cell) => {
+    let piece = cell.firstChild;
+    if (piece !== null) {
+      piece.remove();
+    }
+  });
+};
 
 //model
 let player1Wins = 3,
@@ -57,8 +64,9 @@ const resetScore = () => {
 };
 //reset game
 const resetGame = () => {
-  //resetScore();
+  resetScore();
   //clear board
+  clearBoard();
   console.log("game reset now");
 };
 
@@ -94,7 +102,7 @@ document.querySelector("#change-player-info").addEventListener("click", (event) 
 //listen for reset game button
 document.querySelector("#reset-game").addEventListener("click", (event) => {
   // TODO: make reset function
-  //resetGame();
+  resetGame();
   showModal();
   hideStartButton();
 });
