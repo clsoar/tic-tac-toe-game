@@ -15,6 +15,18 @@ button {
   min-width: 48px;
   margin: auto;
 }
+button.start-game {
+  position: absolute;
+  top: 23.5vh;
+  left: 30.5vw;
+  z-index: 100;
+  height: 10vh;
+  width: 40vw;
+}
+.hidden {
+  display: none;
+  z-index: -1;
+}
 /*
  * Main Container
  */
@@ -114,7 +126,7 @@ table {
   background-color: rgb(1,1,1,0.8)
 }
 .modal-container {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }

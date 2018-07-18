@@ -10,7 +10,8 @@
     <header class="heading">
       <h1>Tic Tac Toe Game</h1>
     </header>
-    <div id="player-modal" class="modal modal-container" role="dialog">
+    <button class="start-game">Start New Game</button>
+    <div id="player-modal" class="hidden modal" role="dialog">
       <form>
         <div class="form-modal">
           <label for="player1-name">Player 1 Name: </label>
@@ -25,10 +26,10 @@
           <label for="player2-name">Player 2 Name: </label>
           <input type="text" name="player2-name" id="player2-name" value="Player 2" maxlength="11">
         </div>
-        <div class="submit">
+        <div class="submit cancel">
           <input type="submit" value="Cancel">
         </div>
-        <div class="submit">
+        <div class="submit accept">
           <input type="submit" value="Submit">
         </div>
       </form>
@@ -40,7 +41,9 @@
         <div id="board-container">
           <table id="board" class="board">
             <tr class="top-line">
-              <td id="td1"></td>
+              <td id="td1">
+                <img src="img/x-mark-128.png" alt="X mark" class="piece-example">
+              </td>
               <td id="td2"></td>
               <td id="td3"></td>
             </tr>
