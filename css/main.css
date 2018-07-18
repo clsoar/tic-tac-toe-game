@@ -36,8 +36,8 @@ table {
 }
 #board table,
 #board td {
-    min-width: 70px;
-    height: 70px;
+    min-width: 90px;
+    height: 90px;
 }
 .top-line td {
   border-bottom: 1px solid black;
@@ -56,15 +56,18 @@ table {
   display: flex;
   flex-wrap: wrap;
  }
- .player-one, .player-two {
+ .player1-container, .player2-container {
   padding: 5px;
   margin: auto;
   font-size: 20px;
   font-weight: 550;
+  display: inline-flex;
+  align-items: center;
  }
 .piece-example {
-   width: 30px;
- }
+  width: 35px;
+  padding: 5px;
+}
 /*
  * Scoreboard
  */
@@ -79,12 +82,23 @@ table {
 }
 #scoreboard table {
   margin: 10px auto;
+  width: 80%
 }
 #scoreboard td {
   min-width: 80px;
   text-align: center;
   font-size: 18px;
   font-weight: 400;
+}
+#reset-buttons {
+  display: inline;
+  margin: auto;
+}
+#reset-game,
+#reset-scores {
+  min-width: 130px;
+  margin-left: auto;
+  margin-right: auto;
 }
 /*
  * Popup Modal
@@ -113,4 +127,32 @@ table {
 .submit {
   display: inline;
   padding: 50px;
+}
+/*
+ * Media quaries for responsive design
+ */
+ @media screen and (min-width: 600px) {
+   #reset-buttons {
+     width: 25%;
+   }
+   #scoreboard table {
+     width: 70%
+   }
+   #board table,
+   #board td {
+     width: 120px;
+     height: 120px;
+   }
+ }
+@media screen and (min-width: 750px) {
+  .main-container {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #board table,
+  #board td {
+    width: 160px;
+    height: 160px;
+  }
 }
