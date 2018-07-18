@@ -48,8 +48,8 @@ table {
 }
 #board table,
 #board td {
-    min-width: 90px;
-    height: 90px;
+  min-width: 90px;
+  height: 90px;
 }
 .top-line td {
   border-bottom: 1px solid black;
@@ -58,7 +58,12 @@ table {
   border-bottom: 1px solid black;
 }
 #td2, #td3, #td5, #td6, #td8, #td9 {
-    border-left: 1px solid black;
+  border-left: 1px solid black;
+}
+.board-piece {
+  display: block;
+  max-width: 85px;
+  margin: auto;
 }
 /*
  * Player info
@@ -155,6 +160,9 @@ table {
      width: 120px;
      height: 120px;
    }
+   .board-piece {
+     max-width: 115px;
+   }
  }
 @media screen and (min-width: 750px) {
   .main-container {
@@ -166,5 +174,8 @@ table {
   #board td {
     width: 160px;
     height: 160px;
+  }
+  .board-piece {
+    max-width: 100%;
   }
 }

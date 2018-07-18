@@ -14,7 +14,23 @@ const hideStartButton = () => {
 const hideModal = () => {modal.classList.add("hidden");};
 const showModal = () => {modal.classList.remove("hidden");};
 
+const renderX = (cell) => {
+  const pieceX = document.createElement("img");
+  pieceX.setAttribute("src", "img/x-mark-128.png");
+  pieceX.setAttribute("alt", "X Mark");
+  pieceX.classList.add("board-piece");
+  cell.appendChild(pieceX);
+}
+const renderO = (cell) => {
+  const pieceO = document.createElement("img");
+  pieceX.setAttribute("src", "circle-outline-128.png");
+  pieceX.setAttribute("alt", "O Mark");
+  pieceX.classList.add("board-piece");
+  cell.appendChild(pieceO);
+}
 //model
+
+
 
 //octopus
 //listen for Player Form Cancel and then hide modal
@@ -63,6 +79,12 @@ document.querySelector("#reset-scores").addEventListener("click", (event) => {
 const gameBoard = document.querySelector("#board");
 const boardCells = gameBoard.querySelectorAll("td");
 console.log(gameBoard, boardCells);
-boardCells.addEventListener("click", function (event) {
-  console.log("game board clicked");
-});
+const boardClick = () => {
+  boardCells.forEach((cell) => {
+    cell.addEventListener("click", (event) => {
+      console.log(cell);
+      renderX(cell);
+    });
+  });
+};
+boardClick();
