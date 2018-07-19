@@ -8,6 +8,7 @@ const player1Score = document.querySelector("#player1-row td:nth-of-type(2)");
 const player2Score = document.querySelector("#player2-row td:nth-of-type(2)");
 const player1Draw = document.querySelector("#player1-row td:nth-of-type(3)");
 const player2Draw = document.querySelector("#player2-row td:nth-of-type(3)");
+const player1Name = document.querySelector
 
 //hide button functions
 const hideStartButton = () => {
@@ -26,9 +27,9 @@ const renderX = (cell) => {
 };
 const renderO = (cell) => {
   const pieceO = document.createElement("img");
-  pieceX.setAttribute("src", "circle-outline-128.png");
-  pieceX.setAttribute("alt", "O Mark");
-  pieceX.classList.add("board-piece");
+  pieceO.setAttribute("src", "img/circle-outline-128.png");
+  pieceO.setAttribute("alt", "O Mark");
+  pieceO.classList.add("board-piece");
   cell.appendChild(pieceO);
 };
 const renderScores = (player1Wins, player2Wins, draws) => {
@@ -37,6 +38,7 @@ const renderScores = (player1Wins, player2Wins, draws) => {
   player1Score.innerText = player1Wins;
   player2Score.innerText = player2Wins;
 };
+//clear board
 const clearBoard = () => {
   boardCells.forEach((cell) => {
     let piece = cell.firstChild;
@@ -65,11 +67,9 @@ const resetScore = () => {
 //reset game
 const resetGame = () => {
   resetScore();
-  //clear board
   clearBoard();
   console.log("game reset now");
 };
-
 
 //listen for Player Form Cancel and then hide modal
 cancelButton.addEventListener("click", (event) => {
@@ -118,10 +118,12 @@ const gameBoard = document.querySelector("#board");
 const boardCells = gameBoard.querySelectorAll("td");
 console.log(gameBoard, boardCells);
 const boardClick = () => {
+  let count = 0
   boardCells.forEach((cell) => {
     cell.addEventListener("click", (event) => {
-      console.log(cell);
-      renderX(cell);
+      count+=1;
+      console.log(count);
+      (count%2 !== 0) ? renderX(cell) : renderO(cell);
     });
   });
 };
