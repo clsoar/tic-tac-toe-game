@@ -1,5 +1,7 @@
 "use strict";
-//view
+// Query selectors
+const gameBoard = document.querySelector("#board");
+const boardCells = gameBoard.querySelectorAll("td");
 const modal = document.querySelector("#player-modal");
 const winModal = document.querySelector(".winner-modal");
 const cancelButton = document.querySelector("input[value='Cancel']");
@@ -18,20 +20,20 @@ const player1Scoreboard = document.querySelector("#player1-score-name");
 const player2Scoreboard = document.querySelector("#player2-score-name");
 const whoseTurn = document.querySelector("#players-turn");
 
-
+//variables
 var pieceO, pieceX;
 let player1Wins = 0,
     player2Wins = 0,
     draws = 0,
-    game = 1;
+    count = 0;
+
 //hide button functions
-const hideStartButton = () => {
-  newGameButton.classList.add("start-game", "hidden");
-};
+const hideStartButton = () => {newGameButton.classList.add("start-game", "hidden");};
 const hideModal = () => {modal.classList.add("hidden");};
 const showModal = () => {modal.classList.remove("hidden");};
 const hideWinModal = () => {winModal.classList.add("hidden");};
 const showWinModal = () => {winModal.classList.remove("hidden");};
+
 //render functions
 const renderX = (cell) => {
   pieceX = document.createElement("img");
@@ -66,6 +68,7 @@ const renderNames = () => {
 const renderPlayer1Turn = () => {whoseTurn.innerText = player1NameValue.value + "'s Turn";};
 const renderPlayer2Turn = () => {whoseTurn.innerText = player2NameValue.value + "'s Turn";};
 
+// Game Play Functions
 //clear board
 const clearBoard = () => {
   boardCells.forEach((cell) => {
@@ -75,7 +78,10 @@ const clearBoard = () => {
     }
   });
 };
-
+//count moves
+const countMove = () => {
+  return count += 1;
+}
 //reset scores
 const resetScore = () => {
   //set Wins to 0
@@ -84,10 +90,11 @@ const resetScore = () => {
   //set draws to 0
   draws = 0;
   renderScores(player1Wins, player2Wins, draws);
-  console.log("scores are now reset");
 };
 //reset game
-const resetGame = () => {
+const resetGame = function() {
+  count=0;
+  boardClick();
   resetScore();
   clearBoard();
   console.log("game reset now");
@@ -96,9 +103,9 @@ const resetGame = () => {
 const updateScore = (winner) => {
   //find out which player won or if game was a draw
   let winningPlayer, xPiece = "X Mark", oPiece = "O Mark", winScript;
-  if ((winner === xPiece && game%2 === 1) || (winner === oPiece && game%2 === 0)) {
+  if (winner === xPiece) {
     winningPlayer = 1;
-  }else if ((winner === xPiece && game%2 === 0) || (winner === oPiece && game%2 === 1)) {
+  }else if (winner === oPiece) {
     winningPlayer = 2;
   }else if (winner === "Draw") {
     winningPlayer = 3;
@@ -119,6 +126,7 @@ const updateScore = (winner) => {
   renderScores(player1Wins, player2Wins, draws);
   renderWinner(winScript);
 };
+//win event function
 const winEvent = (winner) => {
   setTimeout(function() {
     // Adjust scores
@@ -136,7 +144,6 @@ const checkWin = () => {
 		    cellArray.push(piece.alt);
     }else {cellArray.push(piece);};
   };
-  console.log(cellArray);
   //nested if statements that check for win condition
   let xPiece = "X Mark", oPiece = "O Mark", winner;
       switch (true) {
@@ -179,24 +186,21 @@ const checkWin = () => {
           winEvent(winner);
           break;
       }
-      console.log(winner, "check");
 };
 
 //listen for Player Form Cancel and then hide modal
 cancelButton.addEventListener("click", function(event) {
   event.preventDefault();
   hideModal();
-  console.log("Canceled");
 });
 //Listen for Player Form Submit
 submitButton.addEventListener("click", function(event) {
   event.preventDefault();
-// TODO: add function to update player info
-  //updatePlayerInfo();
   renderNames();
+  renderPlayer1Turn();
+  resetGame();
   hideModal();
   hideStartButton();
-  console.log("form submitted")
 });
 
 //Listen for Start Game button click
@@ -211,15 +215,14 @@ document.querySelector("#ok-win").addEventListener("click", function(event) {
 });
 
 //listen for change player button and open modal
-document.querySelector("#change-player-info").addEventListener("click", function(event) {
+/*document.querySelector("#change-player-info").addEventListener("click", function(event) {
   showModal();
   hideStartButton();
-});
+});*/
 
 //listen for reset game button
 document.querySelector("#reset-game").addEventListener("click", function(event) {
   // Reset game and open start modal
-  resetGame();
   showModal();
   hideStartButton();
 });
@@ -231,29 +234,24 @@ document.querySelector("#reset-scores").addEventListener("click", (event) => {
 });
 
 //listen for click on gameboard
-const gameBoard = document.querySelector("#board");
-const boardCells = gameBoard.querySelectorAll("td");
-console.log(gameBoard, boardCells);
-const boardClick = () => {
-  //check which game number it is. Odd game, player 1 is X, even game player 2 is X
-  let count;
-  (game%2 === 1) ? count = 0 : count = 1;
-  boardCells.forEach((cell) => {
+
+const boardClick = function() {
+  //listen for click in each table cell
+  boardCells.forEach(function(cell) {
     cell.addEventListener("click", function(event) {
         //check if cell is empty and then add alternating pieces
         //with each click
         let piece = cell.firstChild;
         if (piece === null) {
-          count+=1;
-          if(count%2 !== 0) {
+          if(count%2 === 0) {
             renderX(cell);
             renderPlayer2Turn();
           } else {
             renderO(cell);
             renderPlayer1Turn();
           }
-          console.log(count);
           checkWin();
+          countMove();
         };
     });
   });
