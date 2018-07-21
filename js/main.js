@@ -48,9 +48,9 @@ const clearBoard = () => {
 };
 
 //model
-let player1Wins = 3,
-    player2Wins = 5,
-    draws = 4,
+let player1Wins = 0,
+    player2Wins = 0,
+    draws = 0,
     game = 1;
 
 //octopus
@@ -71,6 +71,40 @@ const resetGame = () => {
   clearBoard();
   console.log("game reset now");
 };
+//update score function
+const updateScore = (winner) => {
+  //find out which player won or if game was a draw
+  let winningPlayer, xPiece = "X Mark", oPiece = "O Mark";
+  if ((winner === xPiece && game%2 === 1) || (winner === oPiece && game%2 === 0)) {
+    winningPlayer = 1;
+  }else if ((winner === xPiece && game%2 === 0) || (winner === oPiece && game%2 === 1)) {
+    winningPlayer = 2;
+  }else if (winner === "Draw") {
+    winningPlayer = 3;
+  }
+  //update score of winning player
+  if(winningPlayer ===1){
+    player1Wins += 1;
+
+  }else if(winningPlayer === 2){
+    player2Wins += 1;
+  }else if(winningPlayer === 3){
+    draws += 1;
+  }else{
+    console.log("error in update score logic");
+  }
+  renderScores(player1Wins, player2Wins, draws);
+};
+const winEvent = (winner) => {
+  setTimeout(function() {
+    //show winner Modal
+    // TODO: make winner modal and function and replace alert
+    // Adjust scores
+    updateScore(winner);
+    alert("Player " + winner + " won");
+    clearBoard();
+  }, 50);
+};
 //check for win
 const checkWin = () => {
   let cellArray = [];
@@ -83,44 +117,49 @@ const checkWin = () => {
   console.log(cellArray);
   //nested if statements that check for win condition
   let xPiece = "X Mark", oPiece = "O Mark", winner;
-  for (let i=0;i<cellArray.length;i++){
-    if (cellArray[i] !== null){
-      //switchCheck(cellArray, winner);
       switch (true) {
         case (cellArray[0] == cellArray[3] && cellArray[0] == cellArray[6] && cellArray[0] != null):
           winner = cellArray[0];
+          winEvent(winner);
           break;
         case (cellArray[1] == cellArray[4] && cellArray[1] == cellArray[7] && cellArray[1] != null):
           winner = cellArray[1];
+          winEvent(winner);
           break;
         case (cellArray[2] == cellArray[5] && cellArray[2] == cellArray[8] && cellArray[2] != null):
           winner = cellArray[2];
+          winEvent(winner);
           break;
         case (cellArray[0] == cellArray[1] && cellArray[0] == cellArray[2] && cellArray[0] != null):
           winner = cellArray[0];
+          winEvent(winner);
           break;
         case (cellArray[3] == cellArray[4] && cellArray[3] == cellArray[5] && cellArray[3] != null):
           winner = cellArray[3];
+          winEvent(winner);
           break;
         case (cellArray[6] == cellArray[7] && cellArray[6] == cellArray[8] && cellArray[6] != null):
           winner = cellArray[6];
+          winEvent(winner);
           break;
         case (cellArray[2] == cellArray[4] && cellArray[2] == cellArray[6] && cellArray[2] != null):
           winner = cellArray[2];
+          winEvent(winner);
           break;
         case (cellArray[0] == cellArray[4] && cellArray[0] == cellArray[8] && cellArray[0] != null):
           winner = cellArray[0];
+          winEvent(winner);
           break;
         case (cellArray[0] != null && cellArray[1] != null && cellArray[2] != null &&
           cellArray[3] != null && cellArray[4] != null && cellArray[5] != null &&
            cellArray[6] != null && cellArray[7] != null && cellArray[8] != null):
           winner = "Draw";
+          winEvent(winner);
           break;
-        //default: winner = 0;
       }
       console.log(winner, "check");
-    }
-  }
+  //  }
+//  }
 };
 /*  if (winner == xPiece) {
     console.log("player 1 wins");
@@ -131,31 +170,7 @@ const checkWin = () => {
   }*/
 
 
-const updateScore = (winner) => {
-  //find out which player won
-  let winningPlayer, xPiece = "X Mark", oPiece = "O Mark";
-  if ((winner === xPiece && game%2 === 1) || (winner === oPiece && game%2 === 0)) {
-    winningPlayer = 1;
-  }else if ((winner === xPiece && game%2 === 0) || (winner === oPiece && game%2 === 1)) {
-    winningPlayer = 2;
-  }
-  //update score of winning player
-  if(winningPlayer ===1){
-    player1Wins += 1;
-  } else if(winningPlayer === 2){
-    player2Wins += 1;
-  }else {
-    console.log("error in update score logic");
-  }
-};
-const winEvent = (winner) => {
-    //show winner Modal
-    // TODO: make winner modal and function and replace alert
-    // TODO: adjust scores
-    updateScore();
-  //  alert("You won");
-  //  clearBoard();
-  };
+
 
 //listen for Player Form Cancel and then hide modal
 cancelButton.addEventListener("click", (event) => {
