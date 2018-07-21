@@ -1,6 +1,7 @@
 "use strict";
 //view
 const modal = document.querySelector("#player-modal");
+const winModal = document.querySelector(".winner-modal");
 const cancelButton = document.querySelector("input[value='Cancel']");
 const submitButton = document. querySelector("input[value='Submit']");
 const newGameButton = document.querySelector(".start-game");
@@ -8,14 +9,29 @@ const player1Score = document.querySelector("#player1-row td:nth-of-type(2)");
 const player2Score = document.querySelector("#player2-row td:nth-of-type(2)");
 const player1Draw = document.querySelector("#player1-row td:nth-of-type(3)");
 const player2Draw = document.querySelector("#player2-row td:nth-of-type(3)");
+const winAnnouncement = document.querySelector("span.winner-inner");
+const player1NameValue = document.querySelector("#player1-name");
+const player2NameValue = document.querySelector("#player2-name");
+const player1Name = document.querySelector("#first-player");
+const player2Name = document.querySelector("#second-player");
+const player1Scoreboard = document.querySelector("#player1-score-name");
+const player2Scoreboard = document.querySelector("#player2-score-name");
+const whoseTurn = document.querySelector("#players-turn");
+
+
 var pieceO, pieceX;
+let player1Wins = 0,
+    player2Wins = 0,
+    draws = 0,
+    game = 1;
 //hide button functions
 const hideStartButton = () => {
   newGameButton.classList.add("start-game", "hidden");
 };
 const hideModal = () => {modal.classList.add("hidden");};
 const showModal = () => {modal.classList.remove("hidden");};
-
+const hideWinModal = () => {winModal.classList.add("hidden");};
+const showWinModal = () => {winModal.classList.remove("hidden");};
 //render functions
 const renderX = (cell) => {
   pieceX = document.createElement("img");
@@ -37,6 +53,19 @@ const renderScores = (player1Wins, player2Wins, draws) => {
   player1Score.innerText = player1Wins;
   player2Score.innerText = player2Wins;
 };
+renderScores(player1Wins, player2Wins, draws);
+const renderWinner = (winScript) => {
+  winAnnouncement.innerText = winScript;
+};
+const renderNames = () => {
+  player1Name.innerText= player1NameValue.value;
+  player2Name.innerText= player2NameValue.value;
+  player1Scoreboard.innerText = player1NameValue.value;
+  player2Scoreboard.innerText = player2NameValue.value;
+};
+const renderPlayer1Turn = () => {whoseTurn.innerText = player1NameValue.value + "'s Turn";};
+const renderPlayer2Turn = () => {whoseTurn.innerText = player2NameValue.value + "'s Turn";};
+
 //clear board
 const clearBoard = () => {
   boardCells.forEach((cell) => {
@@ -47,14 +76,6 @@ const clearBoard = () => {
   });
 };
 
-//model
-let player1Wins = 0,
-    player2Wins = 0,
-    draws = 0,
-    game = 1;
-
-//octopus
-renderScores(player1Wins, player2Wins, draws);
 //reset scores
 const resetScore = () => {
   //set Wins to 0
@@ -74,7 +95,7 @@ const resetGame = () => {
 //update score function
 const updateScore = (winner) => {
   //find out which player won or if game was a draw
-  let winningPlayer, xPiece = "X Mark", oPiece = "O Mark";
+  let winningPlayer, xPiece = "X Mark", oPiece = "O Mark", winScript;
   if ((winner === xPiece && game%2 === 1) || (winner === oPiece && game%2 === 0)) {
     winningPlayer = 1;
   }else if ((winner === xPiece && game%2 === 0) || (winner === oPiece && game%2 === 1)) {
@@ -85,24 +106,25 @@ const updateScore = (winner) => {
   //update score of winning player
   if(winningPlayer ===1){
     player1Wins += 1;
-
+    winScript = player1NameValue.value + " Wins!";
   }else if(winningPlayer === 2){
     player2Wins += 1;
+    winScript = player2NameValue.value + " Wins!";
   }else if(winningPlayer === 3){
     draws += 1;
+    winScript = "It's a draw.";
   }else{
     console.log("error in update score logic");
   }
   renderScores(player1Wins, player2Wins, draws);
+  renderWinner(winScript);
 };
 const winEvent = (winner) => {
   setTimeout(function() {
-    //show winner Modal
-    // TODO: make winner modal and function and replace alert
     // Adjust scores
     updateScore(winner);
-    alert("Player " + winner + " won");
-    clearBoard();
+    //show winner Modal & clear board on close
+    showWinModal();
   }, 50);
 };
 //check for win
@@ -158,50 +180,44 @@ const checkWin = () => {
           break;
       }
       console.log(winner, "check");
-  //  }
-//  }
 };
-/*  if (winner == xPiece) {
-    console.log("player 1 wins");
-  }else if(winner == oPiece) {
-    console.log("player 2 wins");
-  } else if(winner == "Draw") {
-    console.log("It's a draw");
-  }*/
-
-
-
 
 //listen for Player Form Cancel and then hide modal
-cancelButton.addEventListener("click", (event) => {
+cancelButton.addEventListener("click", function(event) {
   event.preventDefault();
   hideModal();
   console.log("Canceled");
 });
 //Listen for Player Form Submit
-submitButton.addEventListener("click", (event) => {
+submitButton.addEventListener("click", function(event) {
   event.preventDefault();
 // TODO: add function to update player info
   //updatePlayerInfo();
+  renderNames();
   hideModal();
   hideStartButton();
   console.log("form submitted")
 });
 
 //Listen for Start Game button click
-newGameButton.addEventListener("click", (event) => {
+newGameButton.addEventListener("click", function(event) {
   hideStartButton();
   showModal();
 });
+//listen for ok button on win-Mmdal
+document.querySelector("#ok-win").addEventListener("click", function(event) {
+  hideWinModal();
+  clearBoard();
+});
 
 //listen for change player button and open modal
-document.querySelector("#change-player-info").addEventListener("click", (event) => {
+document.querySelector("#change-player-info").addEventListener("click", function(event) {
   showModal();
   hideStartButton();
 });
 
 //listen for reset game button
-document.querySelector("#reset-game").addEventListener("click", (event) => {
+document.querySelector("#reset-game").addEventListener("click", function(event) {
   // Reset game and open start modal
   resetGame();
   showModal();
@@ -223,20 +239,22 @@ const boardClick = () => {
   let count;
   (game%2 === 1) ? count = 0 : count = 1;
   boardCells.forEach((cell) => {
-    cell.addEventListener("click", (event) => {
+    cell.addEventListener("click", function(event) {
         //check if cell is empty and then add alternating pieces
         //with each click
         let piece = cell.firstChild;
         if (piece === null) {
           count+=1;
-          (count%2 !== 0) ? renderX(cell) : renderO(cell);
+          if(count%2 !== 0) {
+            renderX(cell);
+            renderPlayer2Turn();
+          } else {
+            renderO(cell);
+            renderPlayer1Turn();
+          }
           console.log(count);
           checkWin();
         };
-
-    //  }else if (true) {
-      //  return game+=1;
-    //};
     });
   });
 };

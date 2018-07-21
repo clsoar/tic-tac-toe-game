@@ -18,11 +18,6 @@
           <input type="text" name="player1-name" id="player1-name" value="Player 1" maxlength="11">
         </div>
         <div class="form-modal">
-          Select X or O for Player 1:
-          <input type="radio" name="game-piece" id="select-x" value="X" checked> X
-          <input type="radio" name="game-piece" id="select-o" value="O"> O
-        </div>
-        <div class="form-modal">
           <label for="player2-name">Player 2 Name: </label>
           <input type="text" name="player2-name" id="player2-name" value="Player 2" maxlength="11">
         </div>
@@ -34,7 +29,12 @@
         </div>
       </form>
     </div>
-
+    <div class="winner-modal hidden" role="dialog">
+      <div class="winner-content modal-container">
+        <span class="winner-inner">It's a draw!</span>
+        <button id="ok-win" class="winner-inner">OK</button>
+      </div>
+    </div>
     <main class="main-container" role="main">
       <section id="gameboard" class="gameboard" role="application"></section>
         <h2 id="players-turn">Player 1's Turn</h2>
@@ -79,12 +79,12 @@
             <th>Wins</th>
             <th>Draws</th>
           <tr id="player1-row">
-            <td>Player 1</td>
+            <td id="player1-score-name">Player 1</td>
             <td>0</td>
             <td>0</td>
           </tr>
           <tr id="player2-row">
-            <td>Player 2</td>
+            <td id="player2-score-name">Player 2</td>
             <td>0</td>
             <td>0</td>
           </tr>

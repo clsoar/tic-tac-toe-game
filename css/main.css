@@ -118,8 +118,11 @@ table {
   margin-right: auto;
 }
 /*
- * Popup Modal
+ * Popup Modals
  */
+ /*
+  *Player Info/Start modal
+  */
 .modal {
   position: fixed;
   z-index: 1;
@@ -134,6 +137,7 @@ table {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  flex-direction: column;
 }
 .form-modal {
   color: white;
@@ -143,8 +147,33 @@ table {
 }
 .submit {
   display: inline;
-  padding: 50px;
+  padding: 0 50px;
 }
+/*
+ * Winner Modal
+ */
+.winner-modal {
+   position: absolute;
+   z-index: 1;
+   width: 100%;
+   height: 100%;
+   background-color: rgb(0,0,0);
+   background-color: rgb(7,43,102,0.8);
+   padding: 20px;
+ }
+.winner-content {
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin: 15% auto;
+ }
+.winner-inner {
+   padding: 10px;
+ }
+span.winner-inner {
+   font-size: 25px;
+   text-shadow: 2px 2px #000;
+ }
 /*
  * Media quaries for responsive design
  */
@@ -153,7 +182,7 @@ table {
      width: 25%;
    }
    #scoreboard table {
-     width: 70%
+     width: 70%;
    }
    #board table,
    #board td {
